@@ -129,9 +129,9 @@ public class AmapInstaller {
       if (status == PackageInstaller.STATUS_PENDING_USER_ACTION) {
         Intent confirm;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-          confirm = intent.getParcelableExtra(PackageInstaller.EXTRA_INTENT, Intent.class);
+          confirm = intent.getParcelableExtra(Intent.EXTRA_INTENT, Intent.class);
         } else {
-          confirm = intent.getParcelableExtra(PackageInstaller.EXTRA_INTENT);
+          confirm = intent.getParcelableExtra(Intent.EXTRA_INTENT);
         }
         if (confirm != null) {
           confirm.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
