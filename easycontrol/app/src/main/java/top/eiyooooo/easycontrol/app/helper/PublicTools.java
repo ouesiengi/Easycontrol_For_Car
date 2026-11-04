@@ -254,7 +254,10 @@ public class PublicTools {
     // 设置确认按钮监听
     itemAddDeviceBinding.ok.setOnClickListener(v -> {
       if (device.type == Device.TYPE_NORMAL) {
-        if (String.valueOf(itemAddDeviceBinding.address.getText()).isEmpty()) return;
+        if (String.valueOf(itemAddDeviceBinding.address.getText()).isEmpty()) {
+          Toast.makeText(context, context.getString(R.string.add_device_address_empty), Toast.LENGTH_SHORT).show();
+          return;
+        }
         else if (Adb.adbMap.containsKey(device.uuid) && !Objects.equals(device.address, String.valueOf(itemAddDeviceBinding.address.getText()))) {
           Objects.requireNonNull(Adb.adbMap.get(device.uuid)).close();
         }

@@ -136,6 +136,7 @@
   <string name="add_device_name_hint">Non-null</string>
   <string name="add_device_address">Address:Port</string>
   <string name="add_device_address_hint">IPv4/v6 addresses or domain</string>
+  <string name="add_device_address_empty">Please enter the address first</string>
   <string name="add_device_specify_app">Transfer specified application (package name)</string>
   <string name="add_device_specify_app_hint">Leave blank for recently-used app transfer</string>
   <string name="add_device_scan">Scan</string>

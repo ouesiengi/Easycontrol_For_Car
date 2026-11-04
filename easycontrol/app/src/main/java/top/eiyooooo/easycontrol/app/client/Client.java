@@ -294,6 +294,21 @@ public class Client {
     if (displayId != 0) return;
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) return;
     try {
+      // 应用流转 + 宽高比例自由缩放：建屏时就直接按车机屏幕比例创建，
+      // 避免「先按手机竖屏建屏、连上后再 resize」导致编码器 Surface 与视频尺寸不一致、画面错位
+      if (mode == 1 && device.setResolution && clientView != null) {
+        int[] size = computeVirtualDisplaySize(device);
+        if (size != null) {
+          String sizedOutput = Adb.getStringResponseFromServer(device, "createVirtualDisplay", "width=" + size[0], "height=" + size[1]);
+          Matcher sizedMatcher = firstIntPattern.matcher(sizedOutput);
+          if (sizedMatcher.find()) {
+            displayId = Integer.parseInt(sizedMatcher.group(1));
+            clientView.displayId = displayId;
+            clientView.displaySizedToScreen = true;
+            return;
+          }
+        }
+      }
       String output = Adb.getStringResponseFromServer(device, "createVirtualDisplay");
       Matcher matcher = firstIntPattern.matcher(output);
       if (matcher.find()) {
@@ -301,6 +316,28 @@ public class Client {
         clientView.displayId = displayId;
       }
     } catch (Exception ignored) {
+    }
+  }
+
+  // 按车机屏幕比例计算虚拟显示器尺寸（长边取设备最大大小设置，16 对齐）
+  private int[] computeVirtualDisplaySize(Device device) {
+    try {
+      android.util.DisplayMetrics dm = new android.util.DisplayMetrics();
+      WindowManager windowManager = (WindowManager) AppData.activity.getSystemService(android.content.Context.WINDOW_SERVICE);
+      if (windowManager == null) return null;
+      windowManager.getDefaultDisplay().getRealMetrics(dm);
+      int longSide = Math.max(dm.widthPixels, dm.heightPixels);
+      int shortSide = Math.min(dm.widthPixels, dm.heightPixels);
+      if (longSide < 320 || shortSide < 240) return null;
+      int maxSize = device.maxSize > 0 ? device.maxSize : 1600;
+      int width = Math.min(longSide, maxSize);
+      int height = (int) Math.round((double) width * shortSide / longSide);
+      width = (width + 8) & ~15;
+      height = (height + 8) & ~15;
+      if (width < 320 || height < 240) return null;
+      return new int[]{width, height};
+    } catch (Exception e) {
+      return null;
     }
   }
 
@@ -831,6 +868,7 @@ public class Client {
       }
       displayId = 0;
       clientView.displayId = 0;
+      clientView.displaySizedToScreen = false;
     } else if (mode == 1) {
       tryCreateDisplay(clientView.device);
       if (displayId == 0) return;

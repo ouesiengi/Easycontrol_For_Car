@@ -138,6 +138,7 @@
   <string name="add_device_name_hint">不可为空</string>
   <string name="add_device_address">地址:端口号</string>
   <string name="add_device_address_hint">支持IPv4/v6地址、域名</string>
+  <string name="add_device_address_empty">请先填写地址:端口号</string>
   <string name="add_device_specify_app">流转指定包名的应用</string>
   <string name="add_device_specify_app_hint">留空则为对最近使用的应用流转</string>
   <string name="add_device_scan">扫描</string>

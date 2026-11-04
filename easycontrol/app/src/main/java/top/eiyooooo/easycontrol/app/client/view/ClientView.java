@@ -49,6 +49,8 @@ public class ClientView implements TextureView.SurfaceTextureListener {
   public boolean lastTouchIsInside = true;
   boolean lightState;
   public int multiLink = 0;
+  // 虚拟屏是否已按车机屏幕比例创建（是则跳过后续 resize）
+  public boolean displaySizedToScreen = false;
 
   public ClientView(Device device, Client client, ControlPacket controlPacket, PublicTools.MyFunctionInt changeMode, PublicTools.MyFunction onReady, PublicTools.MyFunction onClose) {
     lightState = !AppData.setting.getTurnOffScreenIfStart();
@@ -81,6 +83,8 @@ public class ClientView implements TextureView.SurfaceTextureListener {
 
   public final AtomicBoolean changeSizeLock = new AtomicBoolean(false);
   public void changeSize(float ratio) {
+    // 虚拟屏创建时已按车机屏幕比例建好，再 resize 反而会让画面错位，直接跳过
+    if (displaySizedToScreen) return;
     new Thread(() -> {
       if (!changeSizeLock.get()) {
         try {
