@@ -1,38 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- 暖琥珀夜驾风：深暖黑底 + 琥珀金强调 -->
-  <color name="glass_background">#0A0705</color>
-  <color name="glass_surface">#99140D06</color>
-  <color name="glass_surface_highlight">#2AFFD48A</color>
-  <color name="glass_border">#33FFB741</color>
-  <color name="glass_accent">#FFB741</color>
-  <color name="glass_text_primary">#FFF6E8</color>
-  <color name="glass_text_secondary">#99EBD9BD</color>
-  <color name="glass_danger">#FF4D3D</color>
+  <!-- 澎湃OS 风格（日间）：浅灰白底 + 纯白卡片 + 系统蓝强调 -->
+  <color name="glass_background">#F7F7FA</color>
+  <color name="glass_surface">#FFFFFFFF</color>
+  <color name="glass_surface_highlight">#14000000</color>
+  <color name="glass_border">#14000000</color>
+  <color name="glass_card_glow">#0A000000</color>
+  <color name="glass_accent">#FF3482FF</color>
+  <color name="glass_accent_base">#FF3482FF</color>
+  <color name="glass_text_primary">#FF191919</color>
+  <color name="glass_text_secondary">#FF8A8A8E</color>
+  <color name="glass_danger">#FFFA3B30</color>
 
-  <color name="background">#0A0705</color>
-  <color name="onBackground">#FFF6E8</color>
-  <color name="onBackgroundSecond">#99EBD9BD</color>
-  <color name="cardBackground">#99140D06</color>
-  <color name="onCardBackground">#FFF6E8</color>
-  <color name="onCardBackgroundSecond">#99EBD9BD</color>
-  <color name="onCardDivider">#33FFB741</color>
+  <color name="background">#F7F7FA</color>
+  <color name="onBackground">#FF191919</color>
+  <color name="onBackgroundSecond">#FF8A8E93</color>
+  <color name="cardBackground">#FFFFFFFF</color>
+  <color name="onCardBackground">#FF191919</color>
+  <color name="onCardBackgroundSecond">#FF8A8E93</color>
+  <color name="onCardDivider">#14191919</color>
 
   <!-- 特殊色彩 -->
-  <color name="button">#99140D06</color>
-  <color name="onButton">#FFF6E8</color>
-  <color name="alert">#FF4D3D</color>
-  <color name="onAlert">#FFF6E8</color>
+  <color name="button">#FFFFFFFF</color>
+  <color name="onButton">#FF191919</color>
+  <color name="alert">#FFFA3B30</color>
+  <color name="onAlert">#FFFFFFFF</color>
   <color name="translucent">#80000000</color>
 
   <!-- 客户端界面色彩 -->
-  <color name="clientBar">#FFB741</color>
-  <color name="clientBarSecond">#26FFB741</color>
+  <color name="clientBar">#FF3482FF</color>
+  <color name="clientBarSecond">#1A3482FF</color>
 
-  <!-- 迷你界面色彩（多设备区分色，暖色为主 + 两个冷色辅助辨识） -->
-  <color name="bar1">#FFB741</color>
-  <color name="bar2">#FF7849</color>
-  <color name="bar3">#63D8C6</color>
-  <color name="bar4">#8FB8FF</color>
+  <!-- 迷你界面色彩（多设备区分色，澎湃OS 系统色板） -->
+  <color name="bar1">#FF3482FF</color>
+  <color name="bar2">#FFFF9500</color>
+  <color name="bar3">#FF34C787</color>
+  <color name="bar4">#FFAF52E0</color>
 
 </resources>

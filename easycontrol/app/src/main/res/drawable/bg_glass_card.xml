@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 磨砂玻璃卡片：外圈琥珀微光 + 半透明暖黑卡面 -->
+<!-- 澎湃OS卡片：纯色卡面 + 极细描边，无发光 -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
   <item>
     <shape android:shape="rectangle">
-      <solid android:color="#14FFB741" />
+      <solid android:color="@color/glass_card_glow" />
       <corners android:radius="30dp" />
     </shape>
   </item>
