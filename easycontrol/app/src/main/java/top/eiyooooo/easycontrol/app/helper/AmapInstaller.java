@@ -123,10 +123,29 @@ public class AmapInstaller {
       if (status == PackageInstaller.STATUS_SUCCESS) {
         Toast.makeText(context, context.getString(R.string.amap_install_success), Toast.LENGTH_LONG).show();
         launch(context);
-      } else {
-        String message = intent.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE);
-        Toast.makeText(context, context.getString(R.string.amap_install_failed, message == null ? String.valueOf(status) : message), Toast.LENGTH_LONG).show();
+        return;
       }
+      // Android 12+ 不再自动弹出安装确认页，必须由应用启动系统给出的确认 Intent
+      if (status == PackageInstaller.STATUS_PENDING_USER_ACTION) {
+        Intent confirm;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+          confirm = intent.getParcelableExtra(PackageInstaller.EXTRA_INTENT, Intent.class);
+        } else {
+          confirm = intent.getParcelableExtra(PackageInstaller.EXTRA_INTENT);
+        }
+        if (confirm != null) {
+          confirm.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+          try {
+            context.startActivity(confirm);
+            return;
+          } catch (Exception e) {
+            Toast.makeText(context, context.getString(R.string.amap_install_failed, String.valueOf(e.getMessage())), Toast.LENGTH_LONG).show();
+            return;
+          }
+        }
+      }
+      String message = intent.getStringExtra(PackageInstaller.EXTRA_STATUS_MESSAGE);
+      Toast.makeText(context, context.getString(R.string.amap_install_failed, message == null ? String.valueOf(status) : message), Toast.LENGTH_LONG).show();
     }
   }
 }
