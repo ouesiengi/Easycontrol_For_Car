@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import top.eiyooooo.easycontrol.app.entity.AppData;
+import top.eiyooooo.easycontrol.app.helper.AmapInstaller;
 import top.eiyooooo.easycontrol.app.helper.PublicTools;
 import top.eiyooooo.easycontrol.app.databinding.ActivitySetBinding;
 import top.eiyooooo.easycontrol.app.helper.ShortcutHelper;
@@ -94,6 +95,11 @@ public class SetActivity extends Activity {
     setActivity.setDisplay.addView(PublicTools.createSwitchCard(this, getString(R.string.set_display_full_fill), getString(R.string.set_display_full_fill_detail), AppData.setting.getFillFull(), isChecked -> AppData.setting.setFillFull(isChecked)).getRoot());
     setActivity.setDisplay.addView(PublicTools.createSwitchCard(this, getString(R.string.set_display_default_show_nav_bar), getString(R.string.set_display_default_show_nav_bar_detail), AppData.setting.getDefaultShowNavBar(), isChecked -> AppData.setting.setDefaultShowNavBar(isChecked)).getRoot());
     // 其他
+    boolean amapInstalled = AmapInstaller.isInstalled(this);
+    setActivity.setOther.addView(PublicTools.createTextCardDetail(this,
+            getString(amapInstalled ? R.string.amap_open_title : R.string.amap_install_title),
+            getString(amapInstalled ? R.string.amap_open_detail : R.string.amap_install_detail),
+            () -> AmapInstaller.installOrOpen(this)).getRoot());
     setActivity.setOther.addView(PublicTools.createSpinnerCard(this, getString(R.string.set_audio_channel), getString(R.string.set_audio_channel_detail), String.valueOf(AppData.setting.getAudioChannel()), audioChannelAdapter, str -> AppData.setting.setAudioChannel(Integer.parseInt(str))).getRoot());
     setActivity.setOther.addView(PublicTools.createSwitchCard(this, getString(R.string.set_audio_only_mode), getString(R.string.set_audio_only_mode_detail), AppData.setting.getAudioOnly(), isChecked -> AppData.setting.setAudioOnly(isChecked)).getRoot());
     setActivity.setOther.addView(PublicTools.createSwitchCard(this, getString(R.string.set_enable_usb), getString(R.string.set_enable_usb_detail), AppData.setting.getEnableUSB(), isChecked -> AppData.setting.setEnableUSB(isChecked)).getRoot());

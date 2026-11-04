@@ -221,4 +221,14 @@
   <string name="start_display_mirroring">Display mirroring</string>
   <string name="start_application_transfer">Application transfer</string>
 
+  <!-- bundled apps -->
+  <string name="amap_install_title">Install Amap Auto</string>
+  <string name="amap_install_detail">Bundled official 8.1.0, links with Amap on your phone</string>
+  <string name="amap_open_title">Open Amap Auto</string>
+  <string name="amap_open_detail">Installed. Tap to launch; share destinations from Amap on your phone</string>
+  <string name="amap_not_bundled">Bundled APK is missing, please rebuild with network access</string>
+  <string name="amap_installing">Preparing installation, please wait…</string>
+  <string name="amap_install_success">Amap Auto installed</string>
+  <string name="amap_install_failed">Install failed: %1$s</string>
+  <string name="amap_launch_failed">Unable to launch Amap Auto</string>
 </resources>

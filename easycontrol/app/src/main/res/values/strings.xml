@@ -224,4 +224,14 @@
   <string name="start_display_mirroring">屏幕镜像</string>
   <string name="start_application_transfer">应用流转</string>
 
+  <!-- 内置应用 -->
+  <string name="amap_install_title">安装高德车机版</string>
+  <string name="amap_install_detail">内置官方 8.1.0 版，装完可与手机高德互联</string>
+  <string name="amap_open_title">打开高德车机版</string>
+  <string name="amap_open_detail">已安装，点击启动；手机高德「分享-车机版」可发送目的地</string>
+  <string name="amap_not_bundled">内置安装包缺失，请联网重新构建后再试</string>
+  <string name="amap_installing">正在准备安装，请稍候…</string>
+  <string name="amap_install_success">高德车机版安装成功</string>
+  <string name="amap_install_failed">安装失败：%1$s</string>
+  <string name="amap_launch_failed">无法启动高德车机版</string>
 </resources>

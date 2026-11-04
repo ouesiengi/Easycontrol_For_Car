@@ -94,3 +94,28 @@ tasks.register('downloadScrcpyServerJar') {
 }
 
 preBuild.dependsOn(tasks.named('downloadScrcpyServerJar'))
+
+// 内置高德地图车机版（官方包，构建时自动下载，不进仓库）
+def amapApkUrl = 'https://mapdownload.autonavi.com/apps/auto/manual/V810/Auto_8.1.0.600185_release_signed.apk'
+def amapApkOutFile = file("$buildDir/generated/assets/amap_auto.apk")
+
+tasks.register('downloadAmapAutoApk') {
+  doLast {
+    if (amapApkOutFile.exists() && amapApkOutFile.length() > 1000000) return
+    scrcpyServerOutDir.mkdirs()
+    try {
+      logger.lifecycle('Downloading Amap Auto APK (about 122MB) ...')
+      new URL(amapApkUrl).withInputStream { input ->
+        amapApkOutFile.withOutputStream { output ->
+          output << input
+        }
+      }
+      logger.lifecycle("Amap Auto APK downloaded, size = ${amapApkOutFile.length()}")
+    } catch (Exception e) {
+      logger.warn("Skip bundling Amap Auto APK: ${e.message}")
+      amapApkOutFile.delete()
+    }
+  }
+}
+
+preBuild.dependsOn(tasks.named('downloadAmapAutoApk'))
